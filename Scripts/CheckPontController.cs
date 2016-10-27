@@ -6,7 +6,7 @@ public class CheckPontController : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         CircleCollider2D myCollider = transform.GetComponent<CircleCollider2D>();
-        myCollider.radius = 5f;
+        myCollider.radius = 5.0f;
     }
 	
 	// Update is called once per frame
