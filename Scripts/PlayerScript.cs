@@ -80,7 +80,6 @@ public class PlayerScript : MonoBehaviour {
         doubleJump();
         jump();
         wallJump();
-        fall();
     }
 
     private void doJump()
@@ -92,7 +91,7 @@ public class PlayerScript : MonoBehaviour {
     {
         if (gameObject.transform.position.y < deadZone)
         {
-            gameController.respawn();
+            gameObject.transform.position = gameController.CheckPoint.transform.position;
         }
     }
 
@@ -102,6 +101,18 @@ public class PlayerScript : MonoBehaviour {
         {
             gameController.respawn();
 
+        }
+
+        if (other.gameObject.CompareTag("Enemy"))
+        {
+            gameController.respawn();     
+        }
+
+        if (other.gameObject.CompareTag("Bonus"))
+        {
+            other.enabled = false;
+            other.GetComponent<Renderer>().enabled = false;
+            gameController.PointsValue++;
         }
 
     }
@@ -116,6 +127,7 @@ public class PlayerScript : MonoBehaviour {
     {
         grounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRad, isGround);
         walled = Physics2D.OverlapCircle(wallCheck.position, wallCheckRad, isWall);
+        fall();
     }
 
 }
